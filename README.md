@@ -550,7 +550,7 @@ done
 ## 📞 联系方式
 
 - 作者：anicmv
-- GitHub: [@anicmv](https://github.com/anicmv)
+- GitHub: [anicmv](https://github.com/anicmv)
 - 问题反馈：[Issues](https://github.com/anicmv/torrent-cli/issues)
 
 ---
@@ -558,4 +558,4 @@ done
 
 **如果这个项目对你有帮助，请给一个 ⭐️ Star！**
 
-Made with ❤️ by [anicmv](https://github.com/anicmv)
+Made with ❤️ by anicmv
