@@ -71,7 +71,9 @@ func (c *Creator) createInfoForFile() (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 
 	fileInfo, _ := file.Stat()
 	totalSize := fileInfo.Size()
@@ -204,7 +206,10 @@ func (c *Creator) hashPiecesForFiles(files []string, pieceLength int) ([]byte, e
 		for {
 			n, err := file.Read(buffer[currentPos:])
 			if err != nil && err != io.EOF {
-				file.Close()
+				err := file.Close()
+				if err != nil {
+					return nil, err
+				}
 				return nil, err
 			}
 
@@ -221,7 +226,10 @@ func (c *Creator) hashPiecesForFiles(files []string, pieceLength int) ([]byte, e
 			}
 		}
 
-		file.Close()
+		err = file.Close()
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	// 处理最后一个不完整的块

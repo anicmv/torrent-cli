@@ -13,13 +13,19 @@ var rootCmd = &cobra.Command{
 	Long: `torrent-cli
 Tools for inspecting, creating and modifying bittorrent metafiles.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+		err := cmd.Help()
+		if err != nil {
+			return
+		}
 	},
 }
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		_, err := fmt.Fprintln(os.Stderr, err)
+		if err != nil {
+			return
+		}
 		os.Exit(1)
 	}
 }
